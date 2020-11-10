@@ -1,24 +1,24 @@
 @echo off
-echo Checking if script contains Administrative rights...
+echo Checking if script contains big boi rights...
 net sessions
 if %errorlevel%==0 (
 echo Success!
 ) else (
-echo No admin, please run with Administrative rights...
+echo let me do whatever I want, please run with big boi rights...
 pause
 exit
 )
 :MENU
 echo Choose An option:
-echo 1. A bunch of automated things I guess
-echo 2. List Processes
-echo 3. Changing Password Policies
-echo 4. Find Files
-echo 5. Disable Remote Desktop
-echo 6. Enable Auto-Update
+echo 1. some stuff
+echo 2. show dem processes
+echo 3. Policies de Password
+echo 4. Find contraband
+echo 5. Disable Remote Desktop(letting bad people in our computer >:( )
+echo 6. GIve your pc the good stuff(auto-updates)
 echo 7. Disable Weak services
-echo 8. System Integrity Scan
-echo 9. Powershell rootkit detection
+echo 8. i look for evil stuff
+echo 9. rootkit go boom
 
 CHOICE /C 123456789 /M "Enter your choice:"
 if ERRORLEVEL 9 goto Nine
@@ -31,25 +31,25 @@ if ERRORLEVEL 3 goto Three
 if ERRORLEVEL 2 goto Two
 if ERRORLEVEL 1 goto One
 :One
-REM Automation found from all over the interwebs, sources unknown, please open issue.
-REM Turns on UAC
+REM stop watching me
+REM Turns on the thing that warns you
 reg ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 1 /f
-REM Turns off RDP
+REM Turns off the thing that lets the bad people in
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 1 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD /d 0 /f
 
-REM Failsafe
+REM someone messed up so i do this
 if %errorlevel%==1 netsh advfirewall firewall set service type = remotedesktop mode = disable
 REM Windows auomatic updates
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 3 /f
 
 
-echo Cleaning out the DNS cache...
+echo flushing me stoof
 ipconfig /flushdns
 echo Writing over the hosts file...
 attrib -r -s C:\WINDOWS\system32\drivers\etc\hosts
 echo > C:\Windows\System32\drivers\etc\hosts
-if %errorlevel%==1 echo There was an error in writing to the hosts file (not running this as Admin probably)
+if %errorlevel%==1 echo There was an error in writing to the hosts file (not running this as bigboi probably)
 REM Services
 echo Showing you the services...
 net start
@@ -67,7 +67,7 @@ if %errorlevel%==0 (
 ) else ( 
 	echo Remote Registry is already indicating stopped.
 )
-REM Remove all saved credentials
+REM Logging everyone out of Facebook
 cmdkey.exe /list > "%TEMP%\List.txt"
 findstr.exe Target "%TEMP%\List.txt" > "%TEMP%\tokensonly.txt"
 FOR /F "tokens=1,2 delims= " %%G IN (%TEMP%\tokensonly.txt) DO cmdkey.exe /delete:%%H
@@ -143,26 +143,26 @@ reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v Wa
 reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v DisablePasswordCaching /t REG_DWORD /d 1 /f 
 reg ADD HKCU\SYSTEM\CurrentControlSet\Services\CDROM /v AutoRun /t REG_DWORD /d 1 /f
 reg ADD HKLM\SYSTEM\CurrentControlSet\Control\CrashControl /v CrashDumpEnabled /t REG_DWORD /d 0 /f
-REM Common Policies
-REM Restrict CD ROM drive
+REM Common Policies i guess
+REM Restrict something nobody uses
 reg ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AllocateCDRoms /t REG_DWORD /d 1 /f
-REM Automatic Admin logon
+REM Automatic bigboi logon
 reg ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_DWORD /d 0 /f
 REM Logo message text
 reg ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v LegalNoticeText /t REG_SZ /d "Lol noobz pl0x don't hax, thx bae"
 REM Logon message title bar
 reg ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v LegalNoticeCaption /t REG_SZ /d "Dnt hax me"
-REM Wipe page file from shutdown
+REM Wipe after you flush:)
 reg ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v ClearPageFileAtShutdown /t REG_DWORD /d 1 /f
-REM LOL this is a key? Disallow remote access to floppie disks
+REM floppy disks are dangerous and gross
 reg ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AllocateFloppies /t REG_DWORD /d 1 /f
-REM Prevent print driver installs 
+REM printer=bad
 reg ADD "HKLM\SYSTEM\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers" /v AddPrinterDrivers /t REG_DWORD /d 1 /f
-REM Limit local account use of blank passwords to console
+REM blank = bad
 reg ADD "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 1 /f
-REM Auditing access of Global System Objects
+REM GSO will not be happy after this
 reg ADD "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v auditbaseobjects /t REG_DWORD /d 1 /f
-REM Auditing Backup and Restore
+REM Fixing the time machine
 reg ADD "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v fullprivilegeauditing /t REG_DWORD /d 1 /f
 REM Do not display last user on logon
 reg ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v dontdisplaylastusername /t REG_DWORD /d 1 /f
@@ -172,7 +172,7 @@ REM Enable Installer Detection
 reg ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableInstallerDetection /t REG_DWORD /d 1 /f
 REM Undock without logon
 reg ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v undockwithoutlogon /t REG_DWORD /d 0 /f
-REM Maximum Machine Password Age
+REM Max Pass Age
 reg ADD HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters /v MaximumPasswordAge /t REG_DWORD /d 15 /f
 REM Disable machine account password changes
 reg ADD HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters /v DisablePasswordChange /t REG_DWORD /d 1 /f
@@ -184,11 +184,11 @@ REM Sign Channel
 reg ADD HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters /v SignSecureChannel /t REG_DWORD /d 1 /f
 REM Seal Channel
 reg ADD HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters /v SealSecureChannel /t REG_DWORD /d 1 /f
-REM Don't disable CTRL+ALT+DEL even though it serves no purpose
+REM make logging in dificult
 reg ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v DisableCAD /t REG_DWORD /d 0 /f 
-REM Restrict Anonymous Enumeration #1
+REM step 1
 reg ADD HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v restrictanonymous /t REG_DWORD /d 1 /f 
-REM Restrict Anonymous Enumeration #2
+REM step 2
 reg ADD HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v restrictanonymoussam /t REG_DWORD /d 1 /f 
 REM Idle Time Limit - 45 mins
 reg ADD HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters /v autodisconnect /t REG_DWORD /d 45 /f 
@@ -215,7 +215,7 @@ reg ADD HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v UseMachineId /t REG_DWORD /
 
 goto MENU
 :Two
-REM Listing possible penetrations
+REM Listing possible penetrations(scawy spots)
 cd C:\
 echo "STARTING TO OUTPUT PROCESS FILES DIRECTLY TO THE C:\ DRIVE!"
 wmic process list brief > BriefProcesses.txt
