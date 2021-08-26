@@ -766,8 +766,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-T
 goto MENU
 :Six
 REM Windows auomatic updates
-echo "ENABLING AUTO-UPDATES"
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 3 /f
 goto MENU
 :Seven
 REM Removing good ol' insecure stuff
