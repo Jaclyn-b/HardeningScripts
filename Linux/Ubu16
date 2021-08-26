@@ -1,1 +1,11 @@
+echo "This is in development so be aware you might lose points and have a backup ready."
+sleep 3
+echo "some api shiz that i found on the internet."
+sudo apt-get install gksu wget
+wget https://www.thefanclub.co.za/sites/default/files/public/downloads/ubuntu-server-secure.tar.gz
+sudo tar -zxvf ubuntu-server-secure.tar.gz
+cd ubuntu-server-secure
+sudo chmod +x ubuntu-server-secure.sh
+gksudo sh ubuntu-server-secure.sh
+
 
