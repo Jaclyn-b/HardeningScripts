@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "This is in development so be aware you might lose points and have a backup ready."
 sleep 3
 echo "some api shiz that i found on the internet."
