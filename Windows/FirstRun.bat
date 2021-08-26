@@ -441,9 +441,6 @@ powershell.exe -command "Get-AppxProvisionedPackage -Online | Where-Object {$_.D
 REM stop watching me
 REM Turns on the thing that warns you
 reg ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 1 /f
-REM Turns off the thing that lets the bad people in
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 1 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD /d 0 /f
 
 REM someone messed up so i do this
 if %errorlevel%==1 netsh advfirewall firewall set service type = remotedesktop mode = disable
