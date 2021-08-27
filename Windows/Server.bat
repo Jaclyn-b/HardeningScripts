@@ -10,9 +10,9 @@ exit
 )
 :MENU
 echo Choose An option:
-echo 1. audit machine
+echo 1. Policies de Password
 echo 2. processes
-echo 3. Policies de Password
+echo 3. audit policies
 echo 4. Find contraband
 echo 5. Disable Remote Desktop(letting bad people in our computer >:( )
 echo 6. GIve your pc the good stuff(auto-updates)
@@ -31,5 +31,5 @@ if ERRORLEVEL 3 goto Three
 if ERRORLEVEL 2 goto Two
 if ERRORLEVEL 1 goto One
 :One
-
+net accounts /UNIQUEPW:24
 goto MENU
