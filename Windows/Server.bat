@@ -31,5 +31,7 @@ if ERRORLEVEL 3 goto Three
 if ERRORLEVEL 2 goto Two
 if ERRORLEVEL 1 goto One
 :One
-net accounts /UNIQUEPW:24
+net accounts /uniquepw:24
+net accounts /minpwlen:14
+net accounts /maxpwage:60
 goto MENU
