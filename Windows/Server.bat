@@ -35,4 +35,6 @@ net accounts /uniquepw:24
 net accounts /minpwlen:14
 net accounts /maxpwage:60
 net accounts /uniquepw:24
+echo this may not work
+net accounts /minpwage:1
 goto MENU
