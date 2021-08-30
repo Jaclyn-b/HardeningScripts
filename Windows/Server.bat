@@ -4,7 +4,7 @@ net sessions
 if %errorlevel%==0 (
 echo Success!
 ) else (
-echo let me do whatever I want, please run with big boi rights...
+echo let me do whatever I want, please run with big boi rights(i think i made this but its weird af basically its admin. run with admin...
 pause
 exit
 )
