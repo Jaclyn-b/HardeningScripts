@@ -34,4 +34,5 @@ if ERRORLEVEL 1 goto One
 net accounts /uniquepw:24
 net accounts /minpwlen:14
 net accounts /maxpwage:60
+net accounts /uniquepw:24
 goto MENU
