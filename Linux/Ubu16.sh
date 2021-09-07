@@ -1,6 +1,19 @@
 #!/bin/bash
 echo "This is in development so be aware you might lose points and have a backup ready."
 sleep 3
+
+touch ~/Desktop/Script.log
+echo > ~/Desktop/Script.log
+chmod 777 ~/Desktop/Script.log
+
+mkdir -p ~/Desktop/backups
+chmod 777 ~/Desktop/backups
+printTime "Backups folder created on the Desktop."
+
+cp /etc/group ~/Desktop/backups/
+cp /etc/passwd ~/Desktop/backups/
+printTime "/etc/group and /etc/passwd files backed up."
+
 apt-get -y update
 apt-get -y upgrade
 # File System Configuration
