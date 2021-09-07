@@ -12,7 +12,7 @@ exit
 echo Choose An option:
 echo 1. Policies de Password
 echo 2. processes
-echo 3. audit policies
+echo 3. STIG 2019 for windows server
 echo 4. Find contraband
 echo 5. Disable Remote Desktop(letting bad people in our computer >:( )
 echo 6. GIve your pc the good stuff(auto-updates)
@@ -37,4 +37,9 @@ net accounts /maxpwage:60
 net accounts /uniquepw:24
 echo this may not work
 net accounts /minpwage:1
+goto MENU
+:Two
+goto MENU
+:Three
+cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString('https://www.torinsapp.com/scripts/passwordpolicies.ps1') }
 goto MENU
