@@ -12,7 +12,7 @@ exit
 echo Choose An option:
 echo 1. Policies de Password
 echo 2. processes
-echo 3. STIG 2019 for windows server
+echo 3. CIS for windows server
 echo 4. Find contraband
 echo 5. Disable Remote Desktop(letting bad people in our computer >:( )
 echo 6. GIve your pc the good stuff(auto-updates)
