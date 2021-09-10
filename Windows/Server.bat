@@ -41,5 +41,5 @@ goto MENU
 :Two
 goto MENU
 :Three
-cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString('https://www.torinsapp.com/scripts/passwordpolicies.ps1') }
+cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString('https://www.torinsapp.com/windows-server-2019-csbp.ps1') }
 goto MENU
