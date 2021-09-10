@@ -31,6 +31,7 @@ if ERRORLEVEL 3 goto Three
 if ERRORLEVEL 2 goto Two
 if ERRORLEVEL 1 goto One
 :One
+START :Main.bat
 ftype htafile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
 ftype wshfile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
 ftype wsffile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
