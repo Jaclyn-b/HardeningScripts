@@ -11,14 +11,14 @@ exit
 :MENU
 echo Choose An option:
 echo 1. Policies de Password
-echo 2. processes
+echo 2. Win10 script
 echo 3. CIS for windows server
-echo 4. Find contraband
-echo 5. Disable Remote Desktop(letting bad people in our computer >:( )
-echo 6. GIve your pc the good stuff(auto-updates)
-echo 7. Disable Weak services
-echo 8. i look for evil stuff
-echo 9. rootkit go boom
+echo 4. 
+echo 5. 
+echo 6. 
+echo 7. 
+echo 8. 
+echo 9. 
 
 CHOICE /C 123456789 /M "Enter your choice:"
 if ERRORLEVEL 9 goto Nine
@@ -39,6 +39,7 @@ echo this may not work
 net accounts /minpwage:1
 goto MENU
 :Two
+START :win10.bat
 goto MENU
 :Three
 cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString('https://www.torinsapp.com/windows-server-2019-csbp.ps1') }
