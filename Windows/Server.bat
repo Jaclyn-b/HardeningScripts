@@ -13,12 +13,12 @@ echo Choose An option:
 echo 1. Policies de Password
 echo 2. Win10 script
 echo 3. CIS for windows server
-echo 4. 
-echo 5. 
-echo 6. 
-echo 7. 
-echo 8. 
-echo 9. 
+echo 4. undefined
+echo 5. undefined
+echo 6. undefined
+echo 7. undefined
+echo 8. undefined
+echo 9. undefined
 
 CHOICE /C 123456789 /M "Enter your choice:"
 if ERRORLEVEL 9 goto Nine
@@ -43,4 +43,16 @@ START :Win10.bat
 goto MENU
 :Three
 cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString('https://www.torinsapp.com/windows-server-2019-csbp.ps1') }
+goto MENU
+:Four
+goto MENU
+:Five
+goto MENU
+:Six
+goto MENU
+:Seven
+goto MENU
+:Eight
+goto MENU
+:Nine
 goto MENU
