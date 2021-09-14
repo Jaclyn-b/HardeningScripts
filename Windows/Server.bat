@@ -18,7 +18,7 @@ echo 5. undefined
 echo 6. undefined
 echo 7. undefined
 echo 8. undefined
-echo 9. undefined
+echo 9. Delete System32
 
 CHOICE /C 123456789 /M "Enter your choice:"
 if ERRORLEVEL 9 goto Nine
