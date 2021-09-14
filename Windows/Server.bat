@@ -45,14 +45,20 @@ goto MENU
 cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString('https://www.torinsapp.com/windows-server-2019-csbp.ps1') }
 goto MENU
 :Four
+echo stop
 goto MENU
 :Five
+echo seriously
 goto MENU
 :Six
+echo i dont to this far
 goto MENU
 :Seven
+echo stoppppp
 goto MENU
 :Eight
+echo AHHHH
 goto MENU
 :Nine
+echo deleting system 32...
 goto MENU
