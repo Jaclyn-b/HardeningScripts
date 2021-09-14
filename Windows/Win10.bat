@@ -14,7 +14,7 @@ echo 1. this literallty does everything else
 echo 2. show dem processes
 echo 3. Policies de Password
 echo 4. Find contraband
-echo 5. Disable Remote Desktop(letting bad people in our computer >:( )
+echo 5. Disable Remote Desktop(letting bad people in our computer)
 echo 6. GIve your pc the good stuff(auto-updates)
 echo 7. Disable Weak services
 echo 8. i look for evil stuff
