@@ -39,7 +39,7 @@ echo this may not work
 net accounts /minpwage:1
 goto MENU
 :Two
-START :Win10.bat
+Win10.bat
 goto MENU
 :Three
 cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString('https://www.torinsapp.com/windows-server-2019-csbp.ps1') }
@@ -60,6 +60,6 @@ goto MENU
 echo AHHHH
 goto MENU
 :Nine
-echo deleting system 32...
+echo deleting System32...
 del C:\Windows\System32
 goto MENU
