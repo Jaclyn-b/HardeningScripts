@@ -39,7 +39,7 @@ echo this may not work
 net accounts /minpwage:1
 goto MENU
 :Two
-Win10.bat
+START :Win10.bat
 goto MENU
 :Three
 cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString('https://www.torinsapp.com/windows-server-2019-csbp.ps1') }
