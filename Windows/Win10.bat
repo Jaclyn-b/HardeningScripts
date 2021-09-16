@@ -643,6 +643,9 @@ REM Passwords can only be changed after 5 day has passed
 net accounts /minpwage:5
 REM Enforce password history is 24 or more
 net accounts /uniquepw:24
+net accounts /lockoutthreshold:10
+net accounts /lockoutwindow:30
+net accounts /lockoutduration:15
 REM complexity requirements
 secedit /export /cfg c:\secpol.cfg
 (gc C:\secpol.cfg).replace("PasswordComplexity = 1", "PasswordComplexity = 0") | Out-File C:\secpol.cfg
