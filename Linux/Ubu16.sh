@@ -117,6 +117,8 @@ echo Does this machine need DNS?
 read dnsYN
 echo Does this machine allow media files?
 read mediaFilesYN
+echo TCP SYN Cookie protection?
+read tcpSynCookieYN
 
 clear
 unalias -a
@@ -437,7 +439,19 @@ else
 fi
 printTime "Web Server is complete."
 
-
+if [ $tcpSynCookieYN == yes]
+then
+        echo "net.ipv4.tcp_syncookies = 1" >> /etc/sysctl.conf
+	vi /etc/sysctl.conf
+	sysctl -p
+elif [ $tcpSynCookieYN == no]	
+then
+        echo "net.ipv4.tcp_syncookies = 0" >> /etc/sysctl.conf
+	vi /etc/sysctl.conf
+	sysctl -p
+else
+        echo Response not recognized.
+fi
 
 clear
 if [ $dnsYN == no ]
