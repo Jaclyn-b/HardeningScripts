@@ -13,7 +13,10 @@ printTime "Backups folder created on the Desktop."
 cp /etc/group ~/Desktop/backups/
 cp /etc/passwd ~/Desktop/backups/
 cp /proc/mounts ~/Desktop/backups/
-printTime "/etc/group and /etc/passwd files backed up."
+cp /etc/sudoers ~/Desktop/backups/
+printTime "/etc/group, /etc/passwd, /proc/mounts, abd /etc/sudoers files backed up."
+
+sudo vi /etc/sudoers
 
 echo Type all user account names, with a space in between
 read -a users
