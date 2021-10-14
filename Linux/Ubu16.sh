@@ -1047,6 +1047,11 @@ apt-get -y purge samba-\*
 # Uninstall SNMP
 apt-get -y purge snmp
 #
+#Add libreoffice repository and install libreoffice
+sudo add-apt-repository ppa:libreoffice/ppa
+sudo apt-get update
+sudo apt-get install libreoffice
+#
 #add php repository
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
