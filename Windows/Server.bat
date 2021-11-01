@@ -13,7 +13,7 @@ echo Choose An option:
 echo 1. Policies de Password
 echo 2. Win10 script
 echo 3. CIS for windows server
-echo 4. undefined
+echo 4. server specific stuff
 echo 5. undefined
 echo 6. undefined
 echo 7. undefined
@@ -45,7 +45,7 @@ goto MENU
 cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString('https://www.torinsapp.com/windows-server-2019-csbp.ps1') }
 goto MENU
 :Four
-echo stop
+dism /online /enable-feature /featurename:TelnetServer
 goto MENU
 :Five
 echo seriously
