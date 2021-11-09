@@ -8,13 +8,13 @@ chmod 777 ~/Desktop/Script.log
 
 mkdir -p ~/Desktop/backups
 chmod 777 ~/Desktop/backups
-printTime "Backups folder created on the Desktop."
+echo "Backups folder created on the Desktop."
 
 cp /etc/group ~/Desktop/backups/
 cp /etc/passwd ~/Desktop/backups/
 cp /proc/mounts ~/Desktop/backups/
 cp /etc/sudoers ~/Desktop/backups/
-printTime "/etc/group, /etc/passwd, /proc/mounts, abd /etc/sudoers files backed up."
+echo "/etc/group, /etc/passwd, /proc/mounts, abd /etc/sudoers files backed up."
 
 sudo vi /etc/sudoers
 
@@ -32,7 +32,7 @@ do
 	if [ $yn1 == yes ]
 	then
 		userdel -r ${users[${i}]}
-		printTime "${users[${i}]} has been deleted."
+		echo "${users[${i}]} has been deleted."
 	else	
 		echo Make ${users[${i}]} administrator? yes or no
 		read yn2								
@@ -42,14 +42,14 @@ do
 			gpasswd -a ${users[${i}]} adm
 			gpasswd -a ${users[${i}]} lpadmin
 			gpasswd -a ${users[${i}]} sambashare
-			printTime "${users[${i}]} has been made an administrator."
+			echo "${users[${i}]} has been made an administrator."
 		else
 			gpasswd -d ${users[${i}]} sudo
 			gpasswd -d ${users[${i}]} adm
 			gpasswd -d ${users[${i}]} lpadmin
 			gpasswd -d ${users[${i}]} sambashare
 			gpasswd -d ${users[${i}]} root
-			printTime "${users[${i}]} has been made a standard user."
+			echo "${users[${i}]} has been made a standard user."
 		fi
 		
 		echo Make custom password for ${users[${i}]}? yes or no
@@ -59,14 +59,14 @@ do
 			echo Password:
 			read pw
 			echo -e "$pw\n$pw" | passwd ${users[${i}]}
-			printTime "${users[${i}]} has been given the password '$pw'."
+			echo "${users[${i}]} has been given the password '$pw'."
 		else
 			echo -e "Cupcake21@\nCupcake21@" | passwd ${users[${i}]}
-			printTime "${users[${i}]} has been given the password 'Cupcake21@'."
+			echo "${users[${i}]} has been given the password 'Cupcake21@'."
 		fi
 		passwd -x30 -n3 -w7 ${users[${i}]}
 		usermod -L ${users[${i}]}
-		printTime "${users[${i}]}'s password has been given a maximum age of 30 days, minimum of 3 days, and warning of 7 days. ${users[${i}]}'s account has been locked."
+		echo "${users[${i}]}'s password has been given a maximum age of 30 days, minimum of 3 days, and warning of 7 days. ${users[${i}]}'s account has been locked."
 	fi
 done
 clear
@@ -81,7 +81,7 @@ do
 	clear
 	echo ${usersNew[${i}]}
 	adduser ${usersNew[${i}]}
-	printTime "A user account for ${usersNew[${i}]} has been created."
+	echo "A user account for ${usersNew[${i}]} has been created."
 	clear
 	echo Make ${usersNew[${i}]} administrator? yes or no
 	read ynNew								
@@ -91,14 +91,14 @@ do
 		gpasswd -a ${usersNew[${i}]} adm
 		gpasswd -a ${usersNew[${i}]} lpadmin
 		gpasswd -a ${usersNew[${i}]} sambashare
-		printTime "${usersNew[${i}]} has been made an administrator."
+		echo "${usersNew[${i}]} has been made an administrator."
 	else
-		printTime "${usersNew[${i}]} has been made a standard user."
+		echo "${usersNew[${i}]} has been made a standard user."
 	fi
 	
 	passwd -x30 -n3 -w7 ${usersNew[${i}]}
 	usermod -L ${usersNew[${i}]}
-	printTime "${usersNew[${i}]}'s password has been given a maximum age of 30 days, minimum of 3 days, and warning of 7 days. ${users[${i}]}'s account has been locked."
+	echo "${usersNew[${i}]}'s password has been given a maximum age of 30 days, minimum of 3 days, and warning of 7 days. ${users[${i}]}'s account has been locked."
 done
 
 echo Does this machine need Samba?
@@ -126,43 +126,43 @@ read tcpSynCookieYN
 
 clear
 unalias -a
-printTime "All alias have been removed."
+echo "All alias have been removed."
 
 clear
 usermod -L root
-printTime "Root account has been locked. Use 'usermod -U root' to unlock it."
+echo "Root account has been locked. Use 'usermod -U root' to unlock it."
 
 clear
 chmod 640 .bash_history
-printTime "Bash history file permissions set."
+echo "Bash history file permissions set."
 
 clear
 chmod 604 /etc/shadow
-printTime "Read/Write permissions on shadow have been set."
+echo "Read/Write permissions on shadow have been set."
 
 clear
-printTime "Check for any user folders that do not belong to any users in /home/."
+echo "Check for any user folders that do not belong to any users in /home/."
 ls -a /home/ >> ~/Desktop/Script.log
 
 clear
-printTime "Check for any files for users that should not be administrators in /etc/sudoers.d."
+echo "Check for any files for users that should not be administrators in /etc/sudoers.d."
 ls -a /etc/sudoers.d >> ~/Desktop/Script.log
 
 clear
 cp /etc/rc.local ~/Desktop/backups/
 echo > /etc/rc.local
 echo 'exit 0' >> /etc/rc.local
-printTime "Any startup scripts have been removed."
+echo "Any startup scripts have been removed."
 
 clear
 apt-get install ufw -y -qq
 ufw enable
 ufw deny 1337
-printTime "Firewall enabled and port 1337 blocked."
+echo "Firewall enabled and port 1337 blocked."
 
 clear
 env i='() { :;}; echo Your system is Bash vulnerable' bash -c "echo Bash vulnerability test"
-printTime "Shellshock Bash vulnerability has been fixed."
+echo "Shellshock Bash vulnerability has been fixed."
 
 clear
 chmod 777 /etc/hosts
@@ -170,7 +170,7 @@ cp /etc/hosts ~/Desktop/backups/
 echo > /etc/hosts
 echo -e "127.0.0.1 localhost\n127.0.1.1 $USER\n::1 ip6-localhost ip6-loopback\nfe00::0 ip6-localnet\nff00::0 ip6-mcastprefix\nff02::1 ip6-allnodes\nff02::2 ip6-allrouters" >> /etc/hosts
 chmod 644 /etc/hosts
-printTime "HOSTS file has been set to defaults."
+echo "HOSTS file has been set to defaults."
 
 clear
 chmod 777 /etc/lightdm/lightdm.conf
@@ -178,17 +178,17 @@ cp /etc/lightdm/lightdm.conf ~/Desktop/backups/
 echo > /etc/lightdm/lightdm.conf
 echo -e '[SeatDefaults]\nallow-guest=false\ngreeter-hide-users=true\ngreeter-show-manual-login=true' >> /etc/lightdm/lightdm.conf
 chmod 644 /etc/lightdm/lightdm.conf
-printTime "LightDM has been secured."
+echo "LightDM has been secured."
 
 clear
 find /bin/ -name "*.sh" -type f -delete
-printTime "Scripts in bin have been removed."
+echo "Scripts in bin have been removed."
 
 clear
 cp /etc/default/irqbalance ~/Desktop/backups/
 echo > /etc/default/irqbalance
 echo -e "#Configuration for the irqbalance daemon\n\n#Should irqbalance be enabled?\nENABLED=\"0\"\n#Balance the IRQs only once?\nONESHOT=\"0\"" >> /etc/default/irqbalance
-printTime "IRQ Balance has been disabled."
+echo "IRQ Balance has been disabled."
 
 clear
 cp /etc/sysctl.conf ~/Desktop/backups/
@@ -196,7 +196,7 @@ echo > /etc/sysctl.conf
 echo -e "# Controls IP packet forwarding\nnet.ipv4.ip_forward = 0\n\n# IP Spoofing protection\nnet.ipv4.conf.all.rp_filter = 1\nnet.ipv4.conf.default.rp_filter = 1\n\n# Ignore ICMP broadcast requests\nnet.ipv4.icmp_echo_ignore_broadcasts = 1\n\n# Disable source packet routing\nnet.ipv4.conf.all.accept_source_route = 0\nnet.ipv6.conf.all.accept_source_route = 0\nnet.ipv4.conf.default.accept_source_route = 0\nnet.ipv6.conf.default.accept_source_route = 0\n\n# Ignore send redirects\nnet.ipv4.conf.all.send_redirects = 0\nnet.ipv4.conf.default.send_redirects = 0\n\n# Block SYN attacks\nnet.ipv4.tcp_syncookies = 1\nnet.ipv4.tcp_max_syn_backlog = 2048\nnet.ipv4.tcp_synack_retries = 2\nnet.ipv4.tcp_syn_retries = 5\n\n# Log Martians\nnet.ipv4.conf.all.log_martians = 1\nnet.ipv4.icmp_ignore_bogus_error_responses = 1\n\n# Ignore ICMP redirects\nnet.ipv4.conf.all.accept_redirects = 0\nnet.ipv6.conf.all.accept_redirects = 0\nnet.ipv4.conf.default.accept_redirects = 0\nnet.ipv6.conf.default.accept_redirects = 0\n\n# Ignore Directed pings\nnet.ipv4.icmp_echo_ignore_all = 1\n\n# Accept Redirects? No, this is not router\nnet.ipv4.conf.all.secure_redirects = 0\n\n# Log packets with impossible addresses to kernel log? yes\nnet.ipv4.conf.default.secure_redirects = 0\n\n########## IPv6 networking start ##############\n# Number of Router Solicitations to send until assuming no routers are present.\n# This is host and not router\nnet.ipv6.conf.default.router_solicitations = 0\n\n# Accept Router Preference in RA?\nnet.ipv6.conf.default.accept_ra_rtr_pref = 0\n\n# Learn Prefix Information in Router Advertisement\nnet.ipv6.conf.default.accept_ra_pinfo = 0\n\n# Setting controls whether the system will accept Hop Limit settings from a router advertisement\nnet.ipv6.conf.default.accept_ra_defrtr = 0\n\n#router advertisements can cause the system to assign a global unicast address to an interface\nnet.ipv6.conf.default.autoconf = 0\n\n#how many neighbor solicitations to send out per address?\nnet.ipv6.conf.default.dad_transmits = 0\n\n# How many global unicast IPv6 addresses can be assigned to each interface?
 net.ipv6.conf.default.max_addresses = 1\n\n########## IPv6 networking ends ##############" >> /etc/sysctl.conf
 sysctl -p >> /dev/null
-printTime "Sysctl has been configured."
+echo "Sysctl has been configured."
 
 
 echo Disable IPv6?
@@ -205,7 +205,7 @@ if [ $ipv6YN == yes ]
 then
 	echo -e "\n\n# Disable IPv6\nnet.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
 	sysctl -p >> /dev/null
-	printTime "IPv6 has been disabled."
+	echo "IPv6 has been disabled."
 fi
 
 clear
@@ -220,7 +220,7 @@ then
 	apt-get purge samba-common-bin -y -qq
 	apt-get purge samba4 -y -qq
 	clear
-	printTime "netbios-ns, netbios-dgm, netbios-ssn, and microsoft-ds ports have been denied. Samba has been removed."
+	echo "netbios-ns, netbios-dgm, netbios-ssn, and microsoft-ds ports have been denied. Samba has been removed."
 elif [ $sambaYN == yes ]
 then
 	ufw allow netbios-ns
@@ -242,14 +242,14 @@ then
 	for (( i=0;i<$usersSMBLength;i++))
 	do
 		echo -e 'Moodle!22\nMoodle!22' | smbpasswd -a ${usersSMB[${i}]}
-		printTime "${usersSMB[${i}]} has been given the password 'Moodle!22' for Samba."
+		echo "${usersSMB[${i}]} has been given the password 'Moodle!22' for Samba."
 	done
-	printTime "netbios-ns, netbios-dgm, netbios-ssn, and microsoft-ds ports have been denied. Samba config file has been configured."
+	echo "netbios-ns, netbios-dgm, netbios-ssn, and microsoft-ds ports have been denied. Samba config file has been configured."
 	clear
 else
 	echo Response not recognized.
 fi
-printTime "Samba is complete."
+echo "Samba is complete."
 
 clear
 if [ $ftpYN == no ]
@@ -260,7 +260,7 @@ then
 	ufw deny ftps-data 
 	ufw deny ftps
 	apt-get purge vsftpd -y -qq
-	printTime "vsFTPd has been removed. ftp, sftp, saft, ftps-data, and ftps ports have been denied on the firewall."
+	echo "vsFTPd has been removed. ftp, sftp, saft, ftps-data, and ftps ports have been denied on the firewall."
 elif [ $ftpYN == yes ]
 then
 	ufw allow ftp 
@@ -272,11 +272,11 @@ then
 	cp /etc/vsftpd.conf ~/Desktop/backups/
 	gedit /etc/vsftpd/vsftpd.conf&gedit /etc/vsftpd.conf
 	service vsftpd restart
-	printTime "ftp, sftp, saft, ftps-data, and ftps ports have been allowed on the firewall. vsFTPd service has been restarted."
+	echo "ftp, sftp, saft, ftps-data, and ftps ports have been allowed on the firewall. vsFTPd service has been restarted."
 else
 	echo Response not recognized.
 fi
-printTime "FTP is complete."
+echo "FTP is complete."
 
 
 clear
@@ -284,7 +284,7 @@ if [ $sshYN == no ]
 then
 	ufw deny ssh
 	apt-get purge openssh-server -y -qq
-	printTime "SSH port has been denied on the firewall. Open-SSH has been removed."
+	echo "SSH port has been denied on the firewall. Open-SSH has been removed."
 elif [ $sshYN == yes ]
 then
 	apt-get install openssh-server -y -qq
@@ -297,11 +297,11 @@ then
 	mkdir ~/.ssh
 	chmod 700 ~/.ssh
 	ssh-keygen -t rsa
-	printTime "SSH port has been allowed on the firewall. SSH config file has been configured. SSH RSA 2048 keys have been created."
+	echo "SSH port has been allowed on the firewall. SSH config file has been configured. SSH RSA 2048 keys have been created."
 else
 	echo Response not recognized.
 fi
-printTime "SSH is complete."
+echo "SSH is complete."
 
 clear
 if [ $telnetYN == no ]
@@ -313,17 +313,17 @@ then
 	apt-get purge telnetd -y -qq
 	apt-get purge inetutils-telnetd -y -qq
 	apt-get purge telnetd-ssl -y -qq
-	printTime "Telnet port has been denied on the firewall and Telnet has been removed."
+	echo "Telnet port has been denied on the firewall and Telnet has been removed."
 elif [ $telnetYN == yes ]
 then
 	ufw allow telnet 
 	ufw allow rtelnet 
 	ufw allow telnets
-	printTime "Telnet port has been allowed on the firewall."
+	echo "Telnet port has been allowed on the firewall."
 else
 	echo Response not recognized.
 fi
-printTime "Telnet is complete."
+echo "Telnet is complete."
 
 
 
@@ -336,7 +336,7 @@ then
 	ufw deny imap2 
 	ufw deny imaps 
 	ufw deny pop3s
-	printTime "smtp, pop2, pop3, imap2, imaps, and pop3s ports have been denied on the firewall."
+	echo "smtp, pop2, pop3, imap2, imaps, and pop3s ports have been denied on the firewall."
 elif [ $mailYN == yes ]
 then
 	ufw allow smtp 
@@ -345,11 +345,11 @@ then
 	ufw allow imap2 
 	ufw allow imaps 
 	ufw allow pop3s
-	printTime "smtp, pop2, pop3, imap2, imaps, and pop3s ports have been allowed on the firewall."
+	echo "smtp, pop2, pop3, imap2, imaps, and pop3s ports have been allowed on the firewall."
 else
 	echo Response not recognized.
 fi
-printTime "Mail is complete."
+echo "Mail is complete."
 
 
 
@@ -359,17 +359,17 @@ then
 	ufw deny ipp 
 	ufw deny printer 
 	ufw deny cups
-	printTime "ipp, printer, and cups ports have been denied on the firewall."
+	echo "ipp, printer, and cups ports have been denied on the firewall."
 elif [ $printYN == yes ]
 then
 	ufw allow ipp 
 	ufw allow printer 
 	ufw allow cups
-	printTime "ipp, printer, and cups ports have been allowed on the firewall."
+	echo "ipp, printer, and cups ports have been allowed on the firewall."
 else
 	echo Response not recognized.
 fi
-printTime "Printing is complete."
+echo "Printing is complete."
 
 
 
@@ -391,7 +391,7 @@ then
 	apt-get purge mysql-client-5.5 -y -qq
 	apt-get purge mysql-client-5.6 -y -qq
 	apt-get purge mysql-server-core-5.6 -y -qq
-	printTime "ms-sql-s, ms-sql-m, mysql, and mysql-proxy ports have been denied on the firewall. MySQL has been removed."
+	echo "ms-sql-s, ms-sql-m, mysql, and mysql-proxy ports have been denied on the firewall. MySQL has been removed."
 elif [ $dbYN == yes ]
 then
 	ufw allow ms-sql-s 
@@ -409,11 +409,11 @@ then
 	fi
 	gedit /etc/my.cnf&gedit /etc/mysql/my.cnf&gedit /usr/etc/my.cnf&gedit ~/.my.cnf
 	service mysql restart
-	printTime "ms-sql-s, ms-sql-m, mysql, and mysql-proxy ports have been allowed on the firewall. MySQL has been installed. MySQL config file has been secured. MySQL service has been restarted."
+	echo "ms-sql-s, ms-sql-m, mysql, and mysql-proxy ports have been allowed on the firewall. MySQL has been installed. MySQL config file has been secured. MySQL service has been restarted."
 else
 	echo Response not recognized.
 fi
-printTime "MySQL is complete."
+echo "MySQL is complete."
 
 
 
@@ -424,7 +424,7 @@ then
 	ufw deny https
 	apt-get purge apache2 -y -qq
 	rm -r /var/www/*
-	printTime "http and https ports have been denied on the firewall. Apache2 has been removed. Web server files have been removed."
+	echo "http and https ports have been denied on the firewall. Apache2 has been removed. Web server files have been removed."
 elif [ $httpYN == yes ]
 then
 	apt-get install apache2 -y -qq
@@ -437,11 +437,11 @@ then
 	fi
 	chown -R root:root /etc/apache2
 
-	printTime "http and https ports have been allowed on the firewall. Apache2 config file has been configured. Only root can now access the Apache2 folder."
+	echo "http and https ports have been allowed on the firewall. Apache2 config file has been configured. Only root can now access the Apache2 folder."
 else
 	echo Response not recognized.
 fi
-printTime "Web Server is complete."
+echo "Web Server is complete."
 
 if [ $tcpSynCookieYN == yes]
 then
@@ -462,15 +462,15 @@ if [ $dnsYN == no ]
 then
 	ufw deny domain
 	apt-get purge bind9 -qq
-	printTime "domain port has been denied on the firewall. DNS name binding has been removed."
+	echo "domain port has been denied on the firewall. DNS name binding has been removed."
 elif [ $dnsYN == yes ]
 then
 	ufw allow domain
-	printTime "domain port has been allowed on the firewall."
+	echo "domain port has been allowed on the firewall."
 else
 	echo Response not recognized.
 fi
-printTime "DNS is complete."
+echo "DNS is complete."
 
 
 clear
@@ -493,7 +493,7 @@ then
 	find / -name "*.flac" -type f >> ~/Desktop/Script.log
 	find / -name "*.ogg" -type f >> ~/Desktop/Script.log
 	clear
-	printTime "All audio files has been listed."
+	echo "All audio files has been listed."
 
 	find / -name "*.mpeg" -type f >> ~/Desktop/Script.log
 	find / -name "*.mpg" -type f >> ~/Desktop/Script.log
@@ -539,7 +539,7 @@ then
 	find / -name "*.flv" -type f >> ~/Desktop/Script.log
 	find / -name "*.m4v" -type f >> ~/Desktop/Script.log
 	clear
-	printTime "All video files have been listed."
+	echo "All video files have been listed."
 	
 	find / -name "*.tiff" -type f >> ~/Desktop/Script.log
 	find / -name "*.tif" -type f >> ~/Desktop/Script.log
@@ -561,11 +561,11 @@ then
 	find / -name "*.svg" -type f >> ~/Desktop/Script.log
 	find / -name "*.svgz" -type f >> ~/Desktop/Script.log
 	clear
-	printTime "All image files have been listed."
+	echo "All image files have been listed."
 else
 	echo Response not recognized.
 fi
-printTime "Media files are complete."
+echo "Media files are complete."
 
 clear
 find / -type f -perm 777 >> ~/Desktop/Script.log
@@ -632,11 +632,11 @@ find / -type f -perm 703 >> ~/Desktop/Script.log
 find / -type f -perm 702 >> ~/Desktop/Script.log
 find / -type f -perm 701 >> ~/Desktop/Script.log
 find / -type f -perm 700 >> ~/Desktop/Script.log
-printTime "All files with file permissions between 700 and 777 have been listed above."
+echo "All files with file permissions between 700 and 777 have been listed above."
 
 clear
 find / -name "*.php" -type f >> ~/Desktop/Script.log
-printTime "All PHP files have been listed above. ('/var/cache/dictionaries-common/sqspell.php' is a system PHP file)"
+echo "All PHP files have been listed above. ('/var/cache/dictionaries-common/sqspell.php' is a system PHP file)"
 
 clear
 apt-get purge netcat -y -qq
@@ -650,80 +650,80 @@ apt-get purge socket -y -qq
 apt-get purge sbd -y -qq
 rm /usr/bin/nc
 clear
-printTime "Netcat and all other instances have been removed."
+echo "Netcat and all other instances have been removed."
 
 apt-get purge john -y -qq
 apt-get purge john-data -y -qq
 clear
-printTime "John the Ripper has been removed."
+echo "John the Ripper has been removed."
 
 apt-get purge hydra -y -qq
 apt-get purge hydra-gtk -y -qq
 clear
-printTime "Hydra has been removed."
+echo "Hydra has been removed."
 
 apt-get purge aircrack-ng -y -qq
 clear
-printTime "Aircrack-NG has been removed."
+echo "Aircrack-NG has been removed."
 
 apt-get purge fcrackzip -y -qq
 clear
-printTime "FCrackZIP has been removed."
+echo "FCrackZIP has been removed."
 
 apt-get purge lcrack -y -qq
 clear
-printTime "LCrack has been removed."
+echo "LCrack has been removed."
 
 apt-get purge ophcrack -y -qq
 apt-get purge ophcrack-cli -y -qq
 clear
-printTime "OphCrack has been removed."
+echo "OphCrack has been removed."
 
 apt-get purge pdfcrack -y -qq
 clear
-printTime "PDFCrack has been removed."
+echo "PDFCrack has been removed."
 
 apt-get purge pyrit -y -qq
 clear
-printTime "Pyrit has been removed."
+echo "Pyrit has been removed."
 
 apt-get purge rarcrack -y -qq
 clear
-printTime "RARCrack has been removed."
+echo "RARCrack has been removed."
 
 apt-get purge sipcrack -y -qq
 clear
-printTime "SipCrack has been removed."
+echo "SipCrack has been removed."
 
 apt-get purge irpas -y -qq
 clear
-printTime "IRPAS has been removed."
+echo "IRPAS has been removed."
 
 clear
-printTime 'Are there any hacking tools shown? (not counting libcrack2:amd64 or cracklib-runtime)'
+echo 'Are there any hacking tools shown? (not counting libcrack2:amd64 or cracklib-runtime)'
 dpkg -l | egrep "crack|hack" >> ~/Desktop/Script.log
 
 apt-get purge logkeys -y -qq
 clear 
-printTime "LogKeys has been removed."
+echo "LogKeys has been removed."
 
 apt-get purge zeitgeist-core -y -qq
 apt-get purge zeitgeist-datahub -y -qq
 apt-get purge python-zeitgeist -y -qq
 apt-get purge rhythmbox-plugin-zeitgeist -y -qq
 apt-get purge zeitgeist -y -qq
-printTime "Zeitgeist has been removed."
+echo "Zeitgeist has been removed."
 
 apt-get purge nfs-kernel-server -y -qq
 apt-get purge nfs-common -y -qq
 apt-get purge portmap -y -qq
 apt-get purge rpcbind -y -qq
 apt-get purge autofs -y -qq
-printTime "NFS has been removed."
+echo "NFS has been removed."
 
 apt-get purge nginx -y -qq
 apt-get purge nginx-common -y -qq
-printTime "NGINX has been removed."
+echo "NGINX has been removed."
 
 apt-get purge inetd -y -qq
 apt-get purge openbsd-inetd -y -qq
@@ -739,17 +739,17 @@ apt-get purge inetutils-telnet -y -qq
 apt-get purge inetutils-telnetd -y -qq
 apt-get purge inetutils-tools -y -qq
 apt-get purge inetutils-traceroute -y -qq
-printTime "Inetd (super-server) and all inet utilities have been removed."
+echo "Inetd (super-server) and all inet utilities have been removed."
 
 clear
 apt-get purge vnc4server -y -qq
 apt-get purge vncsnapshot -y -qq
 apt-get purge vtgrab -y -qq
-printTime "VNC has been removed."
+echo "VNC has been removed."
 
 clear
 apt-get purge snmp -y -qq
-printTime "SNMP has been removed."
+echo "SNMP has been removed."
 
 clear
 cp /etc/login.defs ~/Desktop/backups/
@@ -757,7 +757,7 @@ sed -i '160s/.*/PASS_MAX_DAYS\o01130/' /etc/login.defs
 sed -i '161s/.*/PASS_MIN_DAYS\o0113/' /etc/login.defs
 sed -i '162s/.*/PASS_MIN_LEN\o0118/' /etc/login.defs
 sed -i '163s/.*/PASS_WARN_AGE\o0117/' /etc/login.defs
-printTime "Password policies have been set with /etc/login.defs."
+echo "Password policies have been set with /etc/login.defs."
 
 clear
 apt-get install libpam-cracklib -y -qq
@@ -765,27 +765,27 @@ cp /etc/pam.d/common-auth ~/Desktop/backups/
 cp /etc/pam.d/common-password ~/Desktop/backups/
 echo -e "#\n# /etc/pam.d/common-auth - authentication settings common to all services\n#\n# This file is included from other service-specific PAM config files,\n# and should contain a list of the authentication modules that define\n# the central authentication scheme for use on the system\n# (e.g., /etc/shadow, LDAP, Kerberos, etc.).  The default is to use the\n# traditional Unix authentication mechanisms.\n#\n# As of pam 1.0.1-6, this file is managed by pam-auth-update by default.\n# To take advantage of this, it is recommended that you configure any\n# local modules either before or after the default block, and use\n# pam-auth-update to manage selection of other modules.  See\n# pam-auth-update(8) for details.\n\n# here are the per-package modules (the \"Primary\" block)\nauth	[success=1 default=ignore]	pam_unix.so nullok_secure\n# here's the fallback if no module succeeds\nauth	requisite			pam_deny.so\n# prime the stack with a positive return value if there isn't one already;\n# this avoids us returning an error just because nothing sets a success code\n# since the modules above will each just jump around\nauth	required			pam_permit.so\n# and here are more per-package modules (the \"Additional\" block)\nauth	optional			pam_cap.so \n# end of pam-auth-update config\nauth required pam_tally2.so deny=5 unlock_time=1800 onerr=fail audit even_deny_root_account silent" > /etc/pam.d/common-auth
 echo -e "#\n# /etc/pam.d/common-password - password-related modules common to all services\n#\n# This file is included from other service-specific PAM config files,\n# and should contain a list of modules that define the services to be\n# used to change user passwords.  The default is pam_unix.\n\n# Explanation of pam_unix options:\n#\n# The \"sha512\" option enables salted SHA512 passwords.  Without this option,\n# the default is Unix crypt.  Prior releases used the option \"md5\".\n#\n# The \"obscure\" option replaces the old \`OBSCURE_CHECKS_ENAB\' option in\n# login.defs.\n#\n# See the pam_unix manpage for other options.\n\n# As of pam 1.0.1-6, this file is managed by pam-auth-update by default.\n# To take advantage of this, it is recommended that you configure any\n# local modules either before or after the default block, and use\n# pam-auth-update to manage selection of other modules.  See\n# pam-auth-update(8) for details.\n\n# here are the per-package modules (the \"Primary\" block)\npassword	[success=1 default=ignore]	pam_unix.so obscure sha512\n# here's the fallback if no module succeeds\npassword	requisite			pam_deny.so\n# prime the stack with a positive return value if there isn't one already;\n# this avoids us returning an error just because nothing sets a success code\n# since the modules above will each just jump around\npassword	required			pam_permit.so\n# and here are more per-package modules (the \"Additional\" block)\npassword	optional	pam_gnome_keyring.so \n# end of pam-auth-update config" > /etc/pam.d/common-password
-printTime "If password policies are not correctly configured, try this for /etc/pam.d/common-password:\npassword requisite pam_cracklib.so retry=3 minlen=8 difok=3 reject_username minclass=3 maxrepeat=2 dcredit=1 ucredit=1 lcredit=1 ocredit=1\npassword requisite pam_pwhistory.so use_authtok remember=24 enforce_for_root"
-printTime "Password policies have been set with and /etc/pam.d."
+echo "If password policies are not correctly configured, try this for /etc/pam.d/common-password:\npassword requisite pam_cracklib.so retry=3 minlen=8 difok=3 reject_username minclass=3 maxrepeat=2 dcredit=1 ucredit=1 lcredit=1 ocredit=1\npassword requisite pam_pwhistory.so use_authtok remember=24 enforce_for_root"
+echo "Password policies have been set with and /etc/pam.d."
 
 clear
 apt-get install iptables -y -qq
 iptables -A INPUT -p all -s localhost  -i eth0 -j DROP
-printTime "All outside packets from internet claiming to be from loopback are denied."
+echo "All outside packets from internet claiming to be from loopback are denied."
 
 clear
 cp /etc/init/control-alt-delete.conf ~/Desktop/backups/
 sed '/^exec/ c\exec false' /etc/init/control-alt-delete.conf
-printTime "Reboot using Ctrl-Alt-Delete has been disabled."
+echo "Reboot using Ctrl-Alt-Delete has been disabled."
 
 clear
 apt-get install apparmor apparmor-profiles -y -qq
-printTime "AppArmor has been installed."
+echo "AppArmor has been installed."
 
 clear
 crontab -l > ~/Desktop/backups/crontab-old
 crontab -r
-printTime "Crontab has been backed up. All startup tasks have been removed from crontab."
+echo "Crontab has been backed up. All startup tasks have been removed from crontab."
 
 clear
 cd /etc/
@@ -795,14 +795,14 @@ echo root >at.allow
 /bin/chown root:root cron.allow at.allow
 /bin/chmod 400 cron.allow at.allow
 cd ..
-printTime "Only root allowed in cron."
+echo "Only root allowed in cron."
 
 clear
 chmod 777 /etc/apt/apt.conf.d/10periodic
 cp /etc/apt/apt.conf.d/10periodic ~/Desktop/backups/
 echo -e "APT::Periodic::Update-Package-Lists \"1\";\nAPT::Periodic::Download-Upgradeable-Packages \"1\";\nAPT::Periodic::AutocleanInterval \"1\";\nAPT::Periodic::Unattended-Upgrade \"1\";" > /etc/apt/apt.conf.d/10periodic
 chmod 644 /etc/apt/apt.conf.d/10periodic
-printTime "Daily update checks, download upgradeable packages, autoclean interval, and unattended upgrade enabled."
+echo "Daily update checks, download upgradeable packages, autoclean interval, and unattended upgrade enabled."
 
 clear
 if [[ $(lsb_release -r) == "Release:	14.04" ]] || [[ $(lsb_release -r) == "Release:	14.10" ]]
@@ -820,19 +820,19 @@ then
 else
 	echo “Error, cannot detect OS version”
 fi
-printTime "Apt Repositories have been added."
+echo "Apt Repositories have been added."
 
 clear
 apt-get update -qq
 apt-get upgrade -qq
 apt-get dist-upgrade -qq
-printTime "Ubuntu OS has checked for updates and has been upgraded."
+echo "Ubuntu OS has checked for updates and has been upgraded."
 
 clear
 apt-get autoremove -y -qq
 apt-get autoclean -y -qq
 apt-get clean -y -qq
-printTime "All unused packages have been removed."
+echo "All unused packages have been removed."
 
 clear
 echo "Check to verify that all update settings are correct."
@@ -842,7 +842,7 @@ clear
 apt-get update
 apt-get upgrade openssl libssl-dev
 apt-cache policy openssl libssl-dev
-printTime "OpenSSL heart bleed bug has been fixed."
+echo "OpenSSL heart bleed bug has been fixed."
 
 clear
 if [[ $(grep root /etc/passwd | wc -l) -gt 1 ]]
@@ -851,13 +851,13 @@ then
 	echo -e "UID 0 is not correctly set to root. Please fix.\nPress enter to continue..."
 	read waiting
 else
-	printTime "UID 0 is correctly set to root."
+	echo "UID 0 is correctly set to root."
 fi
 
 clear
 mkdir -p ~/Desktop/logs
 chmod 777 ~/Desktop/logs
-printTime "Logs folder has been created on the Desktop."
+echo "Logs folder has been created on the Desktop."
 
 clear
 touch ~/Desktop/logs/allusers.txt
@@ -867,25 +867,25 @@ echo -e "User Accounts:" >> ~/Desktop/logs/allusers.txt
 awk -F':' -v "min=${uidMin##UID_MIN}" -v "max=${uidMax##UID_MAX}" '{ if ( $3 >= min && $3 <= max  && $7 != "/sbin/nologin" ) print $0 }' /etc/passwd >> ~/Desktop/logs/allusers.txt
 echo -e "\nSystem Accounts:" >> ~/Desktop/logs/allusers.txt
 awk -F':' -v "min=${uidMin##UID_MIN}" -v "max=${uidMax##UID_MAX}" '{ if ( !($3 >= min && $3 <= max  && $7 != "/sbin/nologin")) print $0 }' /etc/passwd >> ~/Desktop/logs/allusers.txt
-printTime "All users have been logged."
+echo "All users have been logged."
 cp /etc/services ~/Desktop/logs/allports.log
-printTime "All ports log has been created."
+echo "All ports log has been created."
 dpkg -l > ~/Desktop/logs/packages.log
-printTime "All packages log has been created."
+echo "All packages log has been created."
 apt-mark showmanual > ~/Desktop/logs/manuallyinstalled.log
-printTime "All manually instealled packages log has been created."
+echo "All manually instealled packages log has been created."
 service --status-all > ~/Desktop/logs/allservices.txt
-printTime "All running services log has been created."
+echo "All running services log has been created."
 ps ax > ~/Desktop/logs/processes.log
-printTime "All running processes log has been created."
+echo "All running processes log has been created."
 ss -l > ~/Desktop/logs/socketconnections.log
-printTime "All socket connections log has been created."
+echo "All socket connections log has been created."
 sudo netstat -tlnp > ~/Desktop/logs/listeningports.log
-printTime "All listening ports log has been created."
+echo "All listening ports log has been created."
 cp /var/log/auth.log ~/Desktop/logs/auth.log
-printTime "Auth log has been created."
+echo "Auth log has been created."
 cp /var/log/syslog ~/Desktop/logs/syslog.log
-printTime "System log has been created."
+echo "System log has been created."
 
 clear
 apt-get install tree -y -qq
@@ -925,14 +925,14 @@ cp /etc/sudoers Desktop/Comparatives/
 cp /etc/sysctl.conf Desktop/Comparatives/
 tree / -o Desktop/Comparatives/tree.txt -n -p -h -u -g -D -v
 cp /etc/vsftpd.conf Desktop/Comparatives/
-printTime "Tree and Diffuse have been installed, files on current system have been copied for comparison."
+echo "Tree and Diffuse have been installed, files on current system have been copied for comparison."
 
 chmod 777 -R Desktop/Comparatives/
 chmod 777 -R Desktop/backups
 chmod 777 -R Desktop/logs
 
 clear
-printTime "Script is complete."
+echo "Script is complete."
 
 apt-get -y update
 apt-get -y upgrade
